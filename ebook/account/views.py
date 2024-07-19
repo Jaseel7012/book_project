@@ -12,14 +12,12 @@ import stripe
 from django.conf import settings
 from django.urls import reverse
 
-# from . models import Cart,CartItem
 
-# Create your views here.
 
 def listBooks(request):
     username=request.user.username
     
-    # image=request.session['image']
+    
     books=Book.objects.all()
     paginator=Paginator(books,4)
     page_number=request.GET.get('page')
@@ -119,19 +117,6 @@ def userLogout(request):
     logout(request)
     return redirect('login')
                 
-                
-
-              
-               
-               
-          
-                    
-                    
-              
-  
-
-#cart
-
 def add_to_cart(request,book_id):
     book=Book.objects.get(id=book_id)
     
@@ -148,10 +133,6 @@ def add_to_cart(request,book_id):
     except :
         messages.error('login required')
     
-    
-    
-
-
 def view_cart(request):
 
     cart,create=Cart.objects.get_or_create(user=request.user)
